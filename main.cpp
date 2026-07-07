@@ -29,13 +29,6 @@ class student{
         this->classes_held = classes_held ;
         this->classes_attended = classes_attended ;
     }
-    //delete point
-    // void Delete(){
-    //     name = "" ;
-    //     credit = 0 ;
-    //     classes_held = 0 ;
-    //     classes_attended = 0 ;
-    // }
 
     ~student(){
         cout << "Destructor called for " << name << endl;
@@ -68,12 +61,19 @@ int main(){
     cout<< "\n" << endl<< "Enter your choice (1 to 5): "<< endl;
     cin>> choice;
 
+    // FIX IF USER SEND SEND ANY THING OTHER THEN A NUMBER
+    if(cin.fail()){
+        cin.clear();
+        cin.ignore(1000 , '\n');
+        cout<< " ERROR!! ,You must enter a number only";
+        continue;
+    }
+
     switch(choice){
         case 1 :
         if( s1 != nullptr){
             cout<< "A student record already exists. Please delete it before creating a new one." << endl;
-        }
-
+        }else{
         cout<< "Enter student name: ";
         cin>> temp_name ;
         cout<< "Enter student credit: ";
@@ -84,6 +84,7 @@ int main(){
         cin>> temp_classes_attended ;
         s1 = new student(temp_name, temp_credit, temp_classes_held, temp_classes_attended);
         cout<< "Student record created successfully!" << endl;
+        }
         break;
 
         case 2 :
@@ -134,6 +135,7 @@ int main(){
 
         default :
         cout<< "Invalid choice. Please try again." << endl;
+        break;
     }
     }
     return 0;
