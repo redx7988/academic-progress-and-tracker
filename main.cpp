@@ -36,6 +36,43 @@ class student{
 
 };
 
+class logger{
+    public :
+    int present ;
+    int absent ;
+    int cancelled ;
+    
+    logger(int p , int a , int c){
+        present = p ;
+        absent = a ;
+        cancelled = c;
+    }
+
+    void update(int p , int a , int c){
+        present = p ;
+        absent = a ;
+        cancelled = c;
+    }
+
+    void print(){
+        cout << " [+] You were present for "<< present <<" classes."<<endl ;
+        cout << " [-] You were absent for "<< absent <<" classes."<<endl ;
+        cout << " [X] Your " << cancelled << " were cancelled." <<endl ;
+    }
+    
+
+    void percentage (){
+        int total = present + absent ;
+        cout<< ((float)present/total)*100 << "%" <<endl;
+    }
+
+    ~logger(){
+        cout<< "Attendence list deleted sucessfully";
+    }
+};
+
+
+
 int main(){
     
 
@@ -57,8 +94,9 @@ int main(){
     cout<< "2. Read a student record" << endl;
     cout<< "3. Update a student record" << endl;
     cout<< "4. Delete a student record" << endl;
-    cout<< "5. Exit" << endl;
-    cout<< "\n" << endl<< "Enter your choice (1 to 5): "<< endl;
+    cout<< "5. Daily logger" << endl;
+    cout<< "6. Exit" << endl;
+    cout<< "\n" << endl<< "Enter your choice (1 to 6): "<< endl;
     cin>> choice;
 
     // FIX IF USER SEND SEND ANY THING OTHER THEN A NUMBER
@@ -113,6 +151,7 @@ int main(){
             cout<< "Student record updated successfully!" << endl;
         }
         break;
+
         case 4 :
         if( s1== nullptr){
             cout<< "No student record found. Please create a record first." << endl;
@@ -124,7 +163,105 @@ int main(){
         }
         break;
 
-        case 5 :
+        case 5 :{
+
+        int temp_present ;
+        int temp_absent ;
+        int temp_cancelled ;
+
+        logger* l1 = nullptr;
+        bool running = true ;
+        while(running){
+            
+        cout<< "===Welcome to the Daily Logger!===" << endl;
+        cout << "1. Add attendence list " << endl;
+        cout<< "2. Print current attendance " <<endl ;
+        cout<< "3. Update the attendence list"<<endl;
+        cout<< "4. Show current attendance percentage"<< endl;
+        cout<< "5. Delete the attendence list " <<endl;
+        cout<< "6. Go back " <<endl;
+        cin >> choice;
+
+        // FIX IF USER SEND SEND ANY THING OTHER THEN A NUMBER
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(1000 , '\n');
+            cout<< " ERROR!! ,You must enter a number only";
+            continue;
+        }
+        switch(choice){
+            case 1 :
+            if(l1 != nullptr){
+                cout<< "A attendance list already exist . Please delete it first" << endl;
+            }else{
+                cout << "Enter the number of class you attended."<<endl;
+                cin>>temp_present;
+                cout<< "Enter the number of classes you were absent."<<endl;
+                cin>>temp_absent;
+                cout<< "Enter the number of class cancelled."<<endl;
+                cin>> temp_cancelled;
+
+                l1 = new logger(temp_present,temp_absent,temp_cancelled);
+            }
+            break;
+
+            case 2 :
+            if( l1 == nullptr){
+                cout<< "No student record found. Please create a record first." << endl;
+            }else{
+                l1->print();
+            }
+            break;
+
+            case 3 :
+            if(l1 == nullptr){
+                cout<< "No student record found. Please create a record first." << endl;
+            }else{
+                cout<<"Enter the update number of classes present"<<endl;
+                cin>>temp_present;
+                cout<<"Enter the update number of classes absent"<<endl;
+                cin>>temp_absent;
+                cout<<"Enter the update number of classes cancelled"<<endl;
+                cin>>temp_cancelled;
+                l1->update(temp_present,temp_absent,temp_cancelled);
+            }
+            break;
+
+            case 4 :
+            if(l1 == nullptr){
+                cout<< "No student record found. Please create a record first." << endl;
+            }else{
+                cout<< " your current attandence is "<<endl;
+                l1->percentage();
+            }
+            break;
+            
+            case 5 :
+            if( l1== nullptr){
+                cout<< "No student record found. Please create a record first." << endl;
+            }
+            else{
+                delete l1;
+                l1 = nullptr;
+                cout<< "Attendance list deleted successfully!" << endl;
+            }
+            break;
+
+            case 6 :
+            if( l1!= nullptr){
+                delete l1;
+                l1 = nullptr;
+            }
+            running = false;
+            break;
+
+        }        
+        }
+        }
+        break;
+
+
+        case 6 :
         if( s1!=nullptr){
             delete s1;
             s1 = nullptr;
