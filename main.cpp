@@ -270,6 +270,7 @@ int main(){
             break;
             //---------------------------------------------------logger feature to track daily attendance ends here--------------------------------------------
 
+            // ---------------------------------------------------dashboard feature to show student progress---------------------------------------------------
             case 6 :
             if(s1 == nullptr){
                 cout<<"Please create a student list "<<endl ;
@@ -277,7 +278,7 @@ int main(){
                 cout<<"Please create a attendance list "<<endl ;
             }else{
                 cout<<setfill('=')<<setw(80)<<""<<endl;
-                cout<<right<<setfill(' ')<<setw(65)<<"STUDENT DASHBOARD " <<endl;
+                cout<<right<<setfill(' ')<<setw(50)<<"STUDENT DASHBOARD " <<endl;
                 cout<<setfill('=')<<setw(80)<<""<<endl;
                 cout<<left<<setfill(' ')<<setw(20)<<"subject"
                     <<right<<setw(15)<<"credit"
@@ -296,12 +297,18 @@ int main(){
                         cout << "[Warn]" << endl;
                     }
                 cout<<setfill('-')<<setw(80)<<""<<endl ;
+                if(l1->percentage() > 75){
+                cout<< (((l1->present*100)/75) - (l1->present+l1->absent)) << " more classes you can bunk to maintain 75% attendance." << endl;
+                }else{
+                    cout<< "You need to attend " << ((75*(l1->present+l1->absent))/100 - l1->present) << " more classes to reach 75% attendance." << endl;
+                }
+                cout<<setfill('-')<<setw(80)<<""<<endl ;
                 cout<< "Note: The progress bar is a visual representation of your attendance percentage. Each '|' represents 10% attendance." << endl;
                 cout<< "Status: [On track] indicates that your attendance is above or equal to 75%, while [Warn] indicates that your attendance is below 75%." << endl;
                 cout<<setfill('=')<<setw(80)<<""<<endl;
             }
             break;
-            
+            // ---------------------------------------------------dashboard feature to show student progress ends here--------------------------------------------
             case 7 :
             if( s1!=nullptr){
                 delete s1;
@@ -322,4 +329,4 @@ int main(){
         }
     }
     return 0;
-}
+} 
