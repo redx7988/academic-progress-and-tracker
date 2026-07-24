@@ -8,7 +8,8 @@ A terminal-based attendance tracker built in C++ as an OOP practice project. It 
 
 ## NOTE
 No ai was used in making this . Ai was only used for me learn about new concept and fix some issues . whole code was written by me only .
-**NEW FEATURES WILL BE ADDED IN FUTURE SO FIX LIMITATIONS**
+**NEW FEATURES WILL BE ADDED IN FUTURE TO FIX LIMITATIONS**
+
 ---
 
 ## ✨ What It Actually Does Right Now
